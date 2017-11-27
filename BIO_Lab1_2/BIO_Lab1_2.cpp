@@ -10,13 +10,12 @@ using namespace std;
 
 int NumberOfPattern(string dnk0, string pattern0, int n)
 {
-	const char* dnk = dnk0.c_str();
-	const char* pattern = pattern0.c_str();
 	int tmp = 0;	// число вхождений
-	for (int i = 0; i < strlen(dnk); i++)
+	for (int i = 0; i < dnk0.size(); i++)
 	{
-		// сравнивает strlen(pattern) символов dnk с pattern 
-		if (strncmp((dnk + i), pattern, n) == 0)
+		string strdnk = dnk0.substr(i, n);
+		// сравнивает n символов dnk с pattern 
+		if (strdnk == pattern0)
 			tmp++;
 	}
 	return tmp;

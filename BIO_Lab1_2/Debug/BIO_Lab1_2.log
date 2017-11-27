@@ -1,8 +1,2 @@
-﻿  stdafx.cpp
-  BIO_Lab1_2.cpp
-c:\users\demon\appdata\local\githubdesktop\app-1.0.9\labbio1_2\bio_lab1_2\bio_lab1_2.cpp(16): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\demon\appdata\local\githubdesktop\app-1.0.9\labbio1_2\bio_lab1_2\bio_lab1_2.cpp(52): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\demon\appdata\local\githubdesktop\app-1.0.9\labbio1_2\bio_lab1_2\bio_lab1_2.cpp(62): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\demon\appdata\local\githubdesktop\app-1.0.9\labbio1_2\bio_lab1_2\bio_lab1_2.cpp(69): warning C4018: <: несоответствие типов со знаком и без знака
-  BIO_Lab1_2.vcxproj -> C:\Users\demon\AppData\Local\GitHubDesktop\app-1.0.9\LabBIO1_2\Debug\BIO_Lab1_2.exe
+﻿  BIO_Lab1_2.vcxproj -> C:\Users\demon\AppData\Local\GitHubDesktop\app-1.0.9\LabBIO1_2\Debug\BIO_Lab1_2.exe
   BIO_Lab1_2.vcxproj -> C:\Users\demon\AppData\Local\GitHubDesktop\app-1.0.9\LabBIO1_2\Debug\BIO_Lab1_2.pdb (Full PDB)
