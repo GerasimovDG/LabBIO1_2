@@ -5,11 +5,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+#include <string>
 using namespace std;
 
-int NumberOfPattern(char* dnk, char* pattern, int n)
+int NumberOfPattern(string dnk0, string pattern0, int n)
 {
+	const char* dnk = dnk0.c_str();
+	const char* pattern = pattern0.c_str();
 	int tmp = 0;	// число вхождений
 	for (int i = 0; i < strlen(dnk); i++)
 	{
@@ -20,7 +22,6 @@ int NumberOfPattern(char* dnk, char* pattern, int n)
 	return tmp;
 }
 
-
 int main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -30,34 +31,32 @@ int main()
 		cout << "Файл не может быть открыт!\n"; // сообщить об этом
 	else
 	{
-		char dnk[80];
-		char strlength[5];
-		fin.getline(dnk, 80);	// считать строку ( не больше 30 символов)
-		fin.getline(strlength, 5);	// считать 2 строку (5 символов)
+		string dnk;
+		string strlength;
+		getline(fin, dnk, '\n');	// считываем 1 строку
+		getline(fin, strlength, '\n');	// считываем 2 строку
 		fin.close();
 		cout << dnk << endl;
 		cout << strlength << endl;
-		int n = atoi(strlength);	// перевод 2-й строки в int
+		if (dnk.empty() || strlength.empty())
+		{	// если одна из строк пустая - выход
+			return 0;
+		}
+		int n = atoi(strlength.c_str());// перевод 2-й строки в int
 
-		char *pattern = new char[80];
-		vector<int> count(80);
-		char** resPattern = new char*[80];
-		for (int i = 0; i < 80; i++)
-		{
-			resPattern[i] = new char[80];
-		}
-		char** tmpStr = new char*[80];
-		for (int i = 0; i < 80; i++)
-		{
-			tmpStr[i] = new char[80];
-		}
-		for (int i = 0; i < strlen(dnk) - (n - 1); i++)
+		string pattern;
+		vector<int> count;
+		vector<string> resPattern;
+		vector<string> tmpStr;
+
+		for (int i = 0; i < dnk.size() - (n - 1); i++)
 		{
 			int temp = 0;
-			strncpy_s(pattern, 80, (dnk + i), n);
-			temp = NumberOfPattern(dnk, pattern, n);
-			count[i] = temp;
-			strcpy_s(resPattern[i], 80, pattern);
+			pattern.insert(0, dnk, i, n);	// заносим часть днк в pattern
+			temp = NumberOfPattern(dnk, pattern, n);	//считаем число повторений
+			count.insert(count.end(), temp);	// заносим это число в count
+			resPattern.insert(resPattern.end(), pattern);	// добавляем сам pattern в resPattern
+			pattern.clear();	// pattern зануляем
 		}
 		int max = 0;
 		for (int i = 0; i < count.size(); i++)
@@ -65,16 +64,15 @@ int main()
 			if (count[i] > max)
 				max = count[i];
 		}
-		char* srav = new char[1];
 		int t = 0;
 		int res = 0;
-		for (int i = 0; i < strlen(dnk) - (n - 1); i++)
+		for (int i = 0; i < dnk.size() - (n - 1); i++)
 		{
 			if (count[i] == max)
 			{
 				res = count[i];
 				// заносим в tmpstr resPattern[i] (чаще всего встречающийся кусок)
-				tmpStr[t] = resPattern[i];
+				tmpStr.insert(tmpStr.end(), resPattern[i]);
 				t++;
 			}
 		}
@@ -83,7 +81,7 @@ int main()
 			int k = 0;
 			for (int j = 0; j < i; j++)
 			{
-				if (strcmp(tmpStr[i], tmpStr[j]) == 0)
+				if (tmpStr[i] == tmpStr[j])
 				{	// если строки совпали, увеличиваем счетчик
 					k++;
 				}
